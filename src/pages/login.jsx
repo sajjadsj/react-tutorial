@@ -5,17 +5,17 @@
  import React, { Component } from 'react';
  import { Navigate as Redirect } from 'react-router-dom';
  import { login } from '../apiServices/auth.service';
- import { LoginForm } from "./LoginForm";
- import { Spin } from "../htmlElemants/Spin";
- import { ForgotPassword } from "./ForgotPassword";
- import { ResetPassword } from "./ResetPassword";
+ import LoginForm from "./LoginForm";
+ import Spin from "../htmlElemants/Spin";
+ import ForgotPassword from "./ForgotPassword";
+ import ResetPassword from "./ResetPassword";
  import UtilityHelper from '../services/UtilityHelper';
- let CryptoJS = require('crypto-js');
- 
+//  let CryptoJS = require('crypto-js');
+
  class Login extends Component {
    constructor(params) {
      super(params);
- 
+
      this.state = {
        email: '',
        password: '',
@@ -25,7 +25,7 @@
        authentication: 'login',
      };
    }
- 
+
    componentDidMount() {
      // Check if token is valid
      if (
@@ -35,7 +35,7 @@
        this.setState({ authentication: 'logged' });
      }
    }
- 
+
    componentWillUnmount() {
      // Reset state
      this.setState({
@@ -47,11 +47,11 @@
        authentication: 'login',
      });
    }
- 
+
    handleChange = (value, type) => {
      // Reset error state variable
      this.setState({ emailError: '', passwordError: '' });
- 
+
      if (type === 'email') {
        // Update email state variable
        this.setState({ email: value });
@@ -60,44 +60,44 @@
        this.setState({ password: value });
      }
    };
- 
+
    sumbitItem = (type) => { };
- 
+
    sumbitFunction = async () => {
      // Check if email exist
      if (this.state.email.length === 0) {
        this.setState({ emailError: 'emptyEmailError' });
        return;
      }
- 
+
      // Check if password exist
      if (this.state.password.length === 0) {
        this.setState({ passwordError: 'emptyPasswordError' });
        return;
      }
- 
+
      // Check if email format is correct
      if (!this.state.email.match(UtilityHelper.getInstance().emailFormat())) {
        this.setState({ emailError: 'invalidEmailError' });
        return;
      }
- 
+
      await this.handelLoginStates('login', {
        email: this.state.email,
        password: this.state.password,
      });
    };
- 
+
    handelLoginStates = async (params, value) => {
      console.log("params ", params);
      // Show spinner
      this.setState({ waiting: true });
      let userObject = {};
- 
+
      if (params === 'login') {
        // If user tries to login
        let body = { email: value.email, password: value.password, isWeb: 1 };
- 
+
        let loginApiResult = {};
        try {
          const response = await login(body);
@@ -117,7 +117,7 @@
            });
            return;
          }
- 
+
          if (
            errorResponse.msgKey === 'emailPasswordNotMatched' ||
            errorResponse.msgKey === 'emailNotExist'
@@ -135,7 +135,7 @@
              passwordError: 'serverError',
              waiting: false,
            });
- 
+
          this.setState({
            waiting: false,
            showPopup: true,
@@ -167,7 +167,7 @@
        this.setState({ waiting: true });
      }
    };
- 
+
    arrangeUI = () => {
      let UI = (
        <React.Fragment>
@@ -216,7 +216,7 @@
      );
      return UI;
    };
- 
+
    render() {
      if (this.state.authentication === 'logged') {
        return <Redirect to="/dashboard" />;
@@ -225,5 +225,5 @@
      }
    }
  }
- 
+
  export default Login;

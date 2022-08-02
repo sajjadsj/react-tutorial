@@ -134,7 +134,7 @@ class ResetPassword extends Component {
 
     // Check request type
     this.setState({ requestType: 'resetPassword' });
-    let request = '/auth/resetPassword';
+    // let request = '/auth/resetPassword';
 
     if (this.state.hash.length > 0) {
       // Reset request

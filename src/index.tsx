@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// import { Route } from 'react-router-dom';
 
 import { I18nextProvider } from 'react-i18next';
 import i18n from 'i18next';
@@ -23,6 +23,7 @@ class App extends Component {
   render() {
     return (
       <Router>
+      <Routes>
         <Route path="/" element={<Login />} />
         {/* <Route path="/resetPassword/:value" element={<ResetPassword />} /> */}
 
@@ -31,6 +32,7 @@ class App extends Component {
           component={Graphs}
         /> */}
 
+      </Routes>
       </Router>
     );
   }

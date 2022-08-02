@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
-import { Redirect } from 'react-router-dom';
+import { Navigate as Redirect } from 'react-router-dom';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { isErrorText } from '../services/HelperServices';
