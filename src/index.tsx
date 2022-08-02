@@ -1,19 +1,44 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+
+import { I18nextProvider } from 'react-i18next';
+import i18n from 'i18next';
+
+import Login from "./pages/login";
+
+// ToDo:Frontend
+//import 'font-awesome/css/font-awesome.min.css';
+
+class App extends Component {
+  constructor(params:any) {
+    super(params);
+    this.state = {
+      popupText: 'emailNotExist',
+    };
+  }
+
+  render() {
+    return (
+      <Router>
+        <Route path="/" element={<Login />} />
+        {/* <Route path="/resetPassword/:value" element={<ResetPassword />} /> */}
+
+        {/* <Route
+          path={'/dashboard/:fromDate?/:toDate?/:timeType?/:week?'}
+          component={Graphs}
+        /> */}
+
+      </Router>
+    );
+  }
+}
+
+ReactDOM.render(
+  <I18nextProvider i18n={i18n}>
     <App />
-  </React.StrictMode>
+  </I18nextProvider>,
+  document.getElementById('root'),
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
